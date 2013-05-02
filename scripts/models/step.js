@@ -15,16 +15,15 @@ $(document).ready(function () {
         }
     };
 
-    jp.step = function(xC, yC, xT, yT, totalSteps) {
+    jp.Step = function(xC, yC, xT, yT, totalSteps, parentStep) {
         // herustic
-        var h = _private.distanceM(xC, yC, xT, yT);
+        var h = _private.distanceM(xC, yC, xT, yT, parentStep);
 
-        return {
-            x: x,
-            y: y,
-            g: totalSteps,
-            h: h,
-            f: totalSteps + h
-        }
+        this.x = x;
+        this.y = y;
+        this.g = totalSteps;
+        this.h = h;
+        this.f = totalSteps + h;
+        this.parent = parentStep;
     };
 });
