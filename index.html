@@ -5,15 +5,184 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Map</h1>
-    <p id="map"></p>
-    <p id="output"></p>
+    <div class="wrapper">
+        <h1>Map</h1>
+        <p>Click on the map to toggle blockers. Set the start/end point by clicking the buttons then clicking the map.</p>
+        <table class="map break alt">
+            <tr class="map-row">
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="begin"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="end"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile" data-status="closed"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+            <tr class="map-row">
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+                <td class="map-tile"></td>
+            </tr>
+        </table>
 
-    <h2>References</h2>
-    <ul>
-        <li>http://www.raywenderlich.com/4946/introduction-to-a-pathfinding</li>
-        <li>http://en.wikipedia.org/wiki/A*_search_algorithm</li>
-    </ul>
+        <div class="break">
+            <button id="calculate">Find Path</button>
+            <button id="set-begin">Set Start</button>
+            <button id="set-end">Set End</button>
+        </div>
+
+        <h2>References</h2>
+        <ul>
+            <li>http://www.raywenderlich.com/4946/introduction-to-a-pathfinding</li>
+            <li>http://en.wikipedia.org/wiki/A*_search_algorithm</li>
+        </ul>
+    </div>
 
     <a href="https://github.com/ashblue/javascript-pathfinding"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 

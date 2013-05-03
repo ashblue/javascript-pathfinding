@@ -61,10 +61,10 @@ $(document).ready(function () {
         },
 
         findPath: function (xC, yC, xT, yT, maxSearch) {
-            var current,
-                neighbors,
+            var current, // Current best open tile
+                neighbors, // Dump of all nearby neighbor tiles
                 neighborRecord, // Any pre-existing records of a neighbor
-                stepCost, // Temp dump of a g score
+                stepCost, // Dump of a total step score for a neighbor
                 i;
 
             // You must add the starting step

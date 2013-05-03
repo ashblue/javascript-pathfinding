@@ -18,3 +18,41 @@ ul {
 p {
     margin: 0 0 20px;
 }
+
+.wrapper {
+    display: block;
+    margin: 0 auto;
+    width: 960px;
+}
+
+.map {
+    border-collapse: collapse;
+}
+
+.map-tile {
+    border: 2px solid #aaa;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.map-tile[data-status="closed"] {
+    background: #333;
+}
+
+.map-tile[data-status="begin"] {
+    background: #0d0;
+}
+
+.map-tile[data-status="end"] {
+    background: #d00;
+}
+
+.break {
+    margin-bottom: 20px;
+}
+
+.break.alt {
+    margin-bottom: 10px;
+}
