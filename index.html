@@ -8,6 +8,7 @@
     <div class="wrapper">
         <h1>Map</h1>
         <p>Click on the map to toggle blockers. Set the start/end point by clicking the buttons then clicking the map.</p>
+
         <table class="map break alt">
             <tr class="map-row">
                 <td class="map-tile" data-status="closed"></td>
@@ -177,6 +178,17 @@
             <button id="set-end">Set End</button>
         </div>
 
+        <h2>Legend</h2>
+        <ul class="legend break">
+            <li class="open">Open</li>
+            <li class="closed">Closed</li>
+            <li class="begin">Begin</li>
+            <li class="end">End</li>
+            <li class="set-opened">Opened Set</li>
+            <li class="set-closed">Closed Set</li>
+            <li class="path">Path</li>
+        </ul>
+
         <h2>References</h2>
         <ul>
             <li>http://www.raywenderlich.com/4946/introduction-to-a-pathfinding</li>
@@ -194,6 +206,7 @@
     <script type="text/javascript" src="scripts/models/step.js"></script>
 
     <!-- Controllers -->
+    <script type="text/javascript" src="scripts/controllers/visual.js"></script>
     <script type="text/javascript" src="scripts/controllers/map.js"></script>
     <script type="text/javascript" src="scripts/controllers/pathfinder.js"></script>
 

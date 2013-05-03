@@ -35,10 +35,15 @@ p {
     height: 50px;
     margin: 0;
     padding: 0;
+    cursor: pointer;
+}
+
+.map-tile:hover {
+    outline: 5px solid rgba(0, 150, 200, 0.8);
 }
 
 .map-tile[data-status="closed"] {
-    background: #333;
+    background: #000;
 }
 
 .map-tile[data-status="begin"] {
@@ -55,4 +60,42 @@ p {
 
 .break.alt {
     margin-bottom: 10px;
+}
+
+.legend {
+    padding: 0;
+    background: #ddd;
+    display: inline-block;
+    list-style: none;
+    border: 1px solid #aaa;
+    margin-left: 0;
+}
+
+.legend li {
+    border-left: 30px solid #fff;
+    padding: 5px 20px 5px 10px;
+}
+
+.legend .closed {
+    border-color: #000;
+}
+
+.legend .begin {
+    border-color: #0d0;
+}
+
+.legend .end {
+    border-color: #d00;
+}
+
+.legend .set-opened {
+    border-color: #9FD6D2;
+}
+
+.legend .set-closed {
+    border-color: #8B7A5E;
+}
+
+.legend .path {
+    border-color: #f0f;
 }
