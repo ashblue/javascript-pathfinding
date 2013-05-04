@@ -1,7 +1,8 @@
 var jp = jp || {};
 
 $(document).ready(function () {
-    var BTN_PATH = $('#calculate');
+    var $BTN_PATH = $('#calculate'),
+        $BTN_ERASE = $('#erase');
 
     var _event = {
         findPath: function () {
@@ -9,7 +10,9 @@ $(document).ready(function () {
                 end = jp.visual.getEnd();
 
             jp.map.setData(jp.visual.getMap());
-            jp.pathFinder.findPath(begin.x, begin.y, end.x, end.y);
+            var path = jp.pathFinder.findPath(begin.x, begin.y, end.x, end.y);
+            jp.pathFinder.setVisual();
+            jp.visual.setTileGroup(path, 'path')
         }
     };
 
@@ -20,7 +23,8 @@ $(document).ready(function () {
         },
 
         bind: function () {
-            BTN_PATH.click(_event.findPath);
+            $BTN_PATH.click(_event.findPath);
+            $BTN_ERASE.click(jp.visual.erase);
         }
     };
 

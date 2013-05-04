@@ -127,6 +127,11 @@ $(document).ready(function () {
         setTile: function (tile, status) {
             var $tile = this.getTile(tile.x, tile.y);
 
+            // Ignore begin and end tiles
+            if ($tile.attr('data-status') === 'begin' || $tile.attr('data-status') === 'end') {
+                return;
+            }
+
             $tile.attr('data-status', status);
 
             // If stats are present set them
@@ -147,10 +152,23 @@ $(document).ready(function () {
             return this;
         },
 
+        // Erase everything on the map except beginning and end points
+        erase: function () {
+            var $el;
+
+            $MAP_TILES.each(function () {
+                $el = $(this);
+
+                if ($el.attr('data-status') !== 'begin' && $el.attr('data-status') !== 'end') {
+                    $el.html('').attr('data-status', 'open');
+                }
+            });
+        },
+
         // Remove opened set, closed set, and path tiles from the map
         clearPath: function () {
             $MAP_TILES.html('');
-            $(TILES.setClosed + ', ' + TILES.setOpened + ', ' + TILES.open).attr('data-status', 'open');
+            $(TILES.setClosed + ', ' + TILES.setOpened + ', ' + TILES.path).attr('data-status', 'open');
             return this;
         }
     };

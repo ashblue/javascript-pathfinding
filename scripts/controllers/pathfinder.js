@@ -80,9 +80,9 @@ $(document).ready(function () {
                 current = this.getBestOpen();
 
                 // Check if goal has been discovered to build a path
-                if (current.x === xT && current.y === yT)
-//                    return this.buildPath(cameFrom, goal);
-                    return this.buildPath(); // Add params in
+                if (current.x === xT && current.y === yT) {
+                    return this.buildPath(current, []);
+                }
 
                 // Move current into closed set
                 this.removeOpen(current)
@@ -92,7 +92,6 @@ $(document).ready(function () {
                 neighbors = jp.map.getNeighbors(current.x, current.y);
                 for (i = 0; i < neighbors.length; i++) {
                     // Get current step and distance from current to neighbor
-                    console.log(neighbors[i].x, neighbors[i].y);
                     stepCost = current.g + jp.map.getCost(current.x, current.y, neighbors[i].x, neighbors[i].y);
 
                     // Check for the neighbor in the closed set
@@ -118,20 +117,21 @@ $(document).ready(function () {
             return false;
         },
 
-        // Build's the path, I have no idea what to do yet
-        buildPath: function () {
-            console.log('success');
+        // Recursive path buliding method
+        buildPath: function (tile, stack) {
+            stack.push(tile);
 
-            // Pop off start and finish tile for debug purposes
-            this.closed.shift();
-            this.open.pop();
+            if (tile.parent) {
+                return this.buildPath(tile.parent, stack);
+            } else {
+                return stack;
+            }
+        },
 
-            // Print all tiles
+        setVisual: function () {
             jp.visual.clearPath()
                 .setTileGroup(this.open, 'set-opened')
                 .setTileGroup(this.closed, 'set-closed');
-
-            return this;
         },
 
         reset: function () {

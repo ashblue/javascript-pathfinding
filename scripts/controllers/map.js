@@ -13,7 +13,6 @@ $(document).ready(function () {
         data: null,
 
         setData: function (map) {
-            console.log(map);
             this.data = map;
             return this;
         },
