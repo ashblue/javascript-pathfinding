@@ -17,10 +17,10 @@ $(document).ready(function () {
 
     jp.Step = function(xC, yC, xT, yT, totalSteps, parentStep) {
         // herustic
-        var h = _private.distanceM(xC, yC, xT, yT, parentStep);
+        var h = _private.distanceM(xC, yC, xT, yT);
 
-        this.x = x;
-        this.y = y;
+        this.x = xC;
+        this.y = yC;
         this.g = totalSteps;
         this.h = h;
         this.f = totalSteps + h;

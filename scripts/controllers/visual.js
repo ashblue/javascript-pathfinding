@@ -8,6 +8,15 @@ $(document).ready(function () {
         $BTN_START = $('#set-begin'),
         $BTN_END = $('#set-end');
 
+    var TILES = {
+        begin: '[data-status=begin]',
+        end: '[data-status=end]',
+        closed: '[data-status=closed]',
+        setOpened: '[data-status=set-opened]',
+        setClosed: '[data-status=set-closed]',
+        path: '[data-status=path]'
+    };
+
     var _setBegin = false,
         _setEnd = false;
 
@@ -20,11 +29,11 @@ $(document).ready(function () {
 
             // Set square
             if (_setBegin === true) {
-                $MAP.find('[data-status=begin]').attr('data-status', 'oepn');
+                $MAP.find(TILES.begin).attr('data-status', 'oepn');
                 $(this).attr('data-status', 'begin');
                 _setBegin = false;
             } else if (_setEnd === true) {
-                $MAP.find('[data-status=end]').attr('data-status', 'open');
+                $MAP.find(TILES.end).attr('data-status', 'open');
                 $(this).attr('data-status', 'end');
                 _setEnd = false;
             } else if (status === 'closed') {
@@ -73,18 +82,76 @@ $(document).ready(function () {
 
         getMap: function () {
             var tmpMap = [],
+                status,
                 i,
                 j;
 
             for (i = 0; i < MAP_HEIGHT_COUNT; i++) {
                 tmpMap.push([]);
                 for (j = 0; j < MAP_WIDTH_COUNT; j++) {
-//                    console.log(j, i, this.getStatus(j, i));
-                    tmpMap[i][j] = this.getStatus(j, i);
+                    status = this.getStatus(j, i);
+
+                    if (status === 'closed') {
+                        tmpMap[i][j] = 0;
+                    } else {
+                        tmpMap[i][j] = 1;
+                    }
                 }
             }
 
             return tmpMap;
+        },
+
+        getBegin: function () {
+            var $beginTile = $(TILES.begin);
+
+            return {
+                x: $beginTile.index(),
+                y: $beginTile.parent('tr').index()
+            };
+        },
+
+        getEnd: function () {
+            var $endTile = $(TILES.end);
+
+            return {
+                x: $endTile.index(),
+                y: $endTile.parent('tr').index()
+            };
+        },
+
+        getTile: function (x, y) {
+            return $MAP.find('tr:nth-child(' + (y + 1) + ') td:nth-child(' + (x + 1) + ')');
+        },
+
+        setTile: function (tile, status) {
+            var $tile = this.getTile(tile.x, tile.y);
+
+            $tile.attr('data-status', status);
+
+            // If stats are present set them
+            if (tile.f) {
+                $tile.append('<span class="stat f">' + tile.f +'</span>');
+                $tile.append('<span class="stat g">' + tile.g +'</span>');
+                $tile.append('<span class="stat h">' + tile.h +'</span>');
+            }
+
+            return this;
+        },
+
+        setTileGroup: function (steps, tileStatus) {
+            for (var i = 0; i < steps.length; i++) {
+                this.setTile(steps[i], tileStatus);
+            }
+
+            return this;
+        },
+
+        // Remove opened set, closed set, and path tiles from the map
+        clearPath: function () {
+            $MAP_TILES.html('');
+            $(TILES.setClosed + ', ' + TILES.setOpened + ', ' + TILES.open).attr('data-status', 'open');
+            return this;
         }
     };
 });

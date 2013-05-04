@@ -189,6 +189,25 @@
             <li class="path">Path</li>
         </ul>
 
+        <h2>Tile Stats Overview</h2>
+        <dl>
+            <dt>F = Calculated Total</dt>
+            <dd>Sum of the heuristic (H) and current step cost (G)</dd>
+
+            <dt>G = Step Cost</dt>
+            <dd>Total number of steps required to walk here from the start tile.</dd>
+
+            <dt>H = Heuristic Estimate</dt>
+            <dd>To get the Heuristic an equation is used. It attempts to measure the distance from the current tile
+            to the goal.</dd>
+        </dl>
+
+        <span class="stats-preview break">
+            <span class="f">F</span>
+            <span class="g">G</span>
+            <span class="h">H</span>
+        </span>
+
         <h2>References</h2>
         <ul>
             <li>http://www.raywenderlich.com/4946/introduction-to-a-pathfinding</li>
@@ -202,8 +221,8 @@
     <script type="text/javascript" src="scripts/libs/jquery-2.0.0.js"></script>
 
     <!-- Models -->
-    <script type="text/javascript" src="scripts/models/map2d.js"></script>
     <script type="text/javascript" src="scripts/models/step.js"></script>
+    <script type="text/javascript" src="scripts/models/tile.js"></script>
 
     <!-- Controllers -->
     <script type="text/javascript" src="scripts/controllers/visual.js"></script>

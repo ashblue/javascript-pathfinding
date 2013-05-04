@@ -36,6 +36,7 @@ p {
     margin: 0;
     padding: 0;
     cursor: pointer;
+    position: relative;
 }
 
 .map-tile:hover {
@@ -52,6 +53,52 @@ p {
 
 .map-tile[data-status="end"] {
     background: #d00;
+}
+
+.map-tile[data-status="set-closed"] {
+    background: #8B7A5E;
+}
+
+.map-tile[data-status="set-opened"] {
+    background: #9FD6D2;
+}
+
+.map-tile[data-status="path"] {
+    background: #f0f;
+}
+
+.stat {
+    position: absolute;
+}
+.stat.f,
+.stats-preview .f {
+    top: 4px;
+    left: 4px;
+    position: absolute;
+}
+
+.stat.g,
+.stats-preview .g {
+    bottom: 4px;
+    left: 4px;
+    position: absolute;
+}
+
+.stat.h,
+.stats-preview .h {
+    position: absolute;
+    bottom: 4px;
+    right: 5px;
+}
+
+.stats-preview {
+    width: 100px;
+    height: 100px;
+    background: #9FD6D2;
+    border: 5px solid #aaa;
+    display: block;
+    font-size: 30px;
+    position: relative;
 }
 
 .break {

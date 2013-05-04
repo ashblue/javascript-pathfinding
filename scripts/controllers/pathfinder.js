@@ -18,7 +18,7 @@ $(document).ready(function () {
         maxSearchDistance: 10,
 
         addOpen: function (step) {
-            this.closed.push(step);
+            this.open.push(step);
             return this;
         },
 
@@ -32,7 +32,12 @@ $(document).ready(function () {
 
         // Check if the step is already in the open set
         inOpen: function (step) {
+            for (var i = 0; i < this.open.length; i++) {
+                if (this.open[i].x === step.x && this.open[i].y === step.y)
+                    return this.open[i];
+            }
 
+            return false;
         },
 
         // Get the lowest costing tile in the open set
@@ -76,7 +81,8 @@ $(document).ready(function () {
 
                 // Check if goal has been discovered to build a path
                 if (current.x === xT && current.y === yT)
-                    return this.buildPath(cameFrom, goal);
+//                    return this.buildPath(cameFrom, goal);
+                    return this.buildPath(); // Add params in
 
                 // Move current into closed set
                 this.removeOpen(current)
@@ -86,7 +92,8 @@ $(document).ready(function () {
                 neighbors = jp.map.getNeighbors(current.x, current.y);
                 for (i = 0; i < neighbors.length; i++) {
                     // Get current step and distance from current to neighbor
-                    stepCost = this.step + this.map.getCost(current.x, current.y, neighbors[i].x, neighbors[i].y);
+                    console.log(neighbors[i].x, neighbors[i].y);
+                    stepCost = current.g + jp.map.getCost(current.x, current.y, neighbors[i].x, neighbors[i].y);
 
                     // Check for the neighbor in the closed set
                     // then see if its cost is >= the stepCost, if so skip current neighbor
@@ -113,7 +120,18 @@ $(document).ready(function () {
 
         // Build's the path, I have no idea what to do yet
         buildPath: function () {
+            console.log('success');
 
+            // Pop off start and finish tile for debug purposes
+            this.closed.shift();
+            this.open.pop();
+
+            // Print all tiles
+            jp.visual.clearPath()
+                .setTileGroup(this.open, 'set-opened')
+                .setTileGroup(this.closed, 'set-closed');
+
+            return this;
         },
 
         reset: function () {
