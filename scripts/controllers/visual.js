@@ -2,6 +2,7 @@ var jp = jp || {};
 
 $(document).ready(function () {
     var $MAP = $('.map'),
+        MAP_LV_COUNT = 4,
         MAP_WIDTH_COUNT = $MAP.find('tr:first td').length,
         MAP_HEIGHT_COUNT = $MAP.find('tr').length,
         $MAP_TILES = $('.map-tile'),
@@ -107,8 +108,7 @@ $(document).ready(function () {
 
         // Gets status from the dom, count starts at 0
         getStatus: function (x, y) {
-            var status = $MAP.find('tr:nth-child(' + (y + 1) + ') td:nth-child(' + (x + 1) + ')')
-                .attr('data-status');
+            var status = this.getTile(x, y).attr('data-status');
 
             switch (status) {
                 case undefined:
@@ -117,6 +117,20 @@ $(document).ready(function () {
                     return 'open';
                 default:
                     return status;
+            }
+        },
+
+        // Gets level from the DOM, count starts at 1
+        getLv: function (x, y) {
+            var lv = this.getTile(x, y).attr('data-lv');
+
+            switch (lv) {
+                case undefined:
+                    return 1;
+                case '1':
+                    return 1;
+                default:
+                    return parseInt(lv, 10);
             }
         },
 
@@ -135,6 +149,33 @@ $(document).ready(function () {
                         tmpMap[i][j] = 0;
                     } else {
                         tmpMap[i][j] = 1;
+                    }
+                }
+            }
+
+            return tmpMap;
+        },
+
+        // @TODO Incomplete
+        getMap3d: function () {
+            var tmpMap = [],
+                status,
+                lv,
+                i, j, k;
+
+            for (i = 0; i < MAP_LV_COUNT; i++) {
+                tmpMap.push([]);
+                for (j = 0; j < MAP_HEIGHT_COUNT; j++) {
+                    tmpMap[i].push([]);
+                    for (k = 0; k < MAP_WIDTH_COUNT; k++) {
+                        status = this.getStatus(k, j);
+                        lv = this.getLv(k, j);
+
+                        if (lv !== i + 1 || status === 'closed') {
+                            tmpMap[i][j][k] = 0;
+                        } else {
+                            tmpMap[i][j][k] = 1;
+                        }
                     }
                 }
             }

@@ -7,7 +7,7 @@
 <body>
     <div class="wrapper">
         <h1>Map</h1>
-        <p>Click on the map to toggle blockers. Set the start/end point by clicking the buttons then clicking the map.</p>
+        <p>General overview of algorithm and purpose of this map. <br/>Click on the map to toggle blockers. Set the start/end point by clicking the buttons then clicking the map.</p>
 
         <table class="map break alt">
             <tr class="map-row">
@@ -201,7 +201,11 @@
 
             <dt>H = Heuristic Estimate</dt>
             <dd>To get the Heuristic an equation is used. It attempts to measure the distance from the current tile
-            to the goal.</dd>
+                to the goal.</dd>
+
+            <dt>Level</dt>
+            <dd>Current level of the tile. Can be a rating of 1 - 4. If a level has no rating present a 1 will be
+                assumed.</dd>
         </dl>
 
         <span class="stats-preview break">
@@ -209,6 +213,12 @@
             <span class="g">G</span>
             <span class="h">H</span>
         </span>
+
+        <h2>Movement Rules</h2>
+        <ul class="break">
+            <li>Player can only move up/down one level at a time. This means a player cannot go from level 1 to 3.</li>
+            <li>It costs 2 movement points to move up/down a level.</li>
+        </ul>
 
         <h2>References</h2>
         <ul>
