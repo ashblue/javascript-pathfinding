@@ -5,8 +5,10 @@ $(document).ready(function () {
         MAP_WIDTH_COUNT = $MAP.find('tr:first td').length,
         MAP_HEIGHT_COUNT = $MAP.find('tr').length,
         $MAP_TILES = $('.map-tile'),
+        $BTNS = $('button'),
         $BTN_START = $('#set-begin'),
-        $BTN_END = $('#set-end');
+        $BTN_END = $('#set-end'),
+        $BTN_LV = $('#set-lv');
 
     var TILES = {
         begin: '[data-status=begin]',
@@ -18,21 +20,25 @@ $(document).ready(function () {
     };
 
     var _setBegin = false,
-        _setEnd = false;
+        _setEnd = false,
+        _setLv = false;
 
     var _event = {
         toggleOpen: function () {
             var status = $(this).attr('data-status');
 
-            // Exit early if a begin or end square
-            if (status === 'begin' || status === 'end') return;
-
             // Set square
-            if (_setBegin === true) {
-                $MAP.find(TILES.begin).attr('data-status', 'oepn');
+            if (_setLv) {
+                $(this).attr('data-lv', jp.visual.getNewLv($(this)));
+            } else if (status === 'begin' || status === 'end') {
+                return;
+            } else if (_setBegin) {
+                $BTNS.attr('class', '');
+                $MAP.find(TILES.begin).attr('data-status', 'open');
                 $(this).attr('data-status', 'begin');
                 _setBegin = false;
-            } else if (_setEnd === true) {
+            } else if (_setEnd) {
+                $BTNS.attr('class', '');
                 $MAP.find(TILES.end).attr('data-status', 'open');
                 $(this).attr('data-status', 'end');
                 _setEnd = false;
@@ -43,14 +49,47 @@ $(document).ready(function () {
             }
         },
 
+        activeLv: function () {
+            $BTNS.attr('class', '');
+
+            if (_setLv) {
+                _setLv = false;
+            } else {
+                $BTN_LV.addClass('active');
+                _setBegin = false;
+                _setEnd = false;
+                _setLv = true;
+            }
+
+            return this;
+        },
+
         activeStart: function () {
+            if ($BTN_START.hasClass('active')) {
+                $BTNS.attr('class', '');
+                _setBegin = false;
+                return;
+            }
+
+            $BTNS.attr('class', '');
+            $BTN_START.addClass('active');
             _setBegin = true;
             _setEnd = false;
+            _setLv = false;
         },
 
         activeEnd: function () {
+            if ($BTN_END.hasClass('active')) {
+                $BTNS.attr('class', '');
+                _setEnd = false;
+                return;
+            }
+
+            $BTNS.attr('class', '');
+            $BTN_END.addClass('active');
             _setBegin = false;
             _setEnd = true;
+            _setLv = false;
         }
     };
 
@@ -63,6 +102,7 @@ $(document).ready(function () {
             $MAP_TILES.click(_event.toggleOpen);
             $BTN_START.click(_event.activeStart);
             $BTN_END.click(_event.activeEnd);
+            $BTN_LV.click(_event.activeLv);
         },
 
         // Gets status from the dom, count starts at 0
@@ -150,6 +190,18 @@ $(document).ready(function () {
             }
 
             return this;
+        },
+
+        getNewLv: function ($tile) {
+            var lv = parseInt($tile.attr('data-lv'), 10);
+
+            if (isNaN(lv)) {
+                return 2;
+            } else if (lv === 4) {
+                return 1;
+            } else {
+                return lv + 1;
+            }
         },
 
         // Erase everything on the map except beginning and end points

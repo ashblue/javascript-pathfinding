@@ -1,5 +1,5 @@
 body {
-    font-family: arial, helvetica;
+    font-family: arial, helvetica, sans-serif;
     font-size: 14px;
     letter-spacing: 1px;
 }
@@ -19,6 +19,13 @@ p {
     margin: 0 0 20px;
 }
 
+button.active {
+    border-bottom: 4px solid #555;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: -4px;
+}
+
 .wrapper {
     display: block;
     margin: 0 auto;
@@ -27,6 +34,12 @@ p {
 
 .map {
     border-collapse: collapse;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .map-tile {
@@ -39,9 +52,10 @@ p {
     position: relative;
 }
 
-.map-tile:hover {
+/*.map-tile:hover {
     outline: 5px solid rgba(0, 150, 200, 0.8);
-}
+    border-color: #0af;
+}*/
 
 .map-tile[data-status="closed"] {
     background: #000;
@@ -65,6 +79,31 @@ p {
 
 .map-tile[data-status="path"] {
     background: #f0f;
+}
+
+.map-tile[data-lv]:after {
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    width: 47px;
+    letter-spacing: -2px;
+    color: #999;
+}
+
+.map-tile[data-lv="2"]:after {
+    content: '\2022\2022';
+}
+
+.map-tile[data-lv="3"]:after {
+    content: '\2022\2022\2022';
+}
+
+.map-tile[data-lv="4"]:after {
+    content: '\2022\2022\2022\2022';
 }
 
 .stat {
