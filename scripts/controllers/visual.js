@@ -188,7 +188,8 @@ $(document).ready(function () {
 
             return {
                 x: $beginTile.index(),
-                y: $beginTile.parent('tr').index()
+                y: $beginTile.parent('tr').index(),
+                z: (parseInt($beginTile.attr('data-lv'), 10) || 1) - 1
             };
         },
 
@@ -197,7 +198,8 @@ $(document).ready(function () {
 
             return {
                 x: $endTile.index(),
-                y: $endTile.parent('tr').index()
+                y: $endTile.parent('tr').index(),
+                z: (parseInt($endTile.attr('data-lv'), 10) || 1) - 1
             };
         },
 

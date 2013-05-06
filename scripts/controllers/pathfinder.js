@@ -139,6 +139,58 @@ $(document).ready(function () {
             return false;
         },
 
+        findPath3d: function (xC, yC, zC, xT, yT, zT, maxSteps) {
+            var current, // Current best open tile
+                neighbors, // Dump of all nearby neighbor tiles
+                neighborRecord, // Any pre-existing records of a neighbor
+                stepCost, // Dump of a total step score for a neighbor
+                i;
+
+            // You must add the starting step
+            this.reset()
+                .addOpen(new jp.Step3d(xC, yC, zC, xT, yT, zT, this.step, false));
+
+            while (this.open.length !== 0) {
+                current = this.getBestOpen();
+
+                // Check if goal has been discovered to build a path
+                if (current.x === xT && current.y === yT && current.z === zT) {
+                    return this.buildPath(current, []);
+                }
+
+                // Move current into closed set
+                this.removeOpen(current)
+                    .addClosed(current);
+
+                // Get neighbors from the map and check them
+                neighbors = jp.map.getNeighbors3d(current.x, current.y, current.z);
+                for (i = 0; i < neighbors.length; i++) {
+                    // Get current step and distance from current to neighbor
+                    stepCost = current.g + jp.map.getCost3d(current.x, current.y, current.z, neighbors[i].x, neighbors[i].y, neighbors[i].z);
+
+                    // Check for the neighbor in the closed set
+                    // then see if its cost is >= the stepCost, if so skip current neighbor
+                    neighborRecord = this.inClosed3d(neighbors[i]);
+                    if (neighborRecord && stepCost >= neighborRecord.g)
+                        continue;
+
+                    // Verify neighbor doesn't exist or new score for it is better
+                    neighborRecord = this.inOpen(neighbors[i]);
+                    if (!neighborRecord || stepCost < neighborRecord.g) {
+                        if (!neighborRecord) {
+                            this.addOpen(new jp.Step3d(neighbors[i].x, neighbors[i].y, neighbors[i].z, xT, yT, zT, stepCost, current));
+                        } else {
+                            neighborRecord.parent = current;
+                            neighborRecord.g = stepCost;
+                            neighborRecord.f = stepCost + neighborRecord.h;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        },
+
         // Recursive path buliding method
         buildPath: function (tile, stack) {
             stack.push(tile);
