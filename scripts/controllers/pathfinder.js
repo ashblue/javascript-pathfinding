@@ -40,6 +40,15 @@ $(document).ready(function () {
             return false;
         },
 
+        inOpen3d: function (step) {
+            for (var i = 0; i < this.open.length; i++) {
+                if (this.open[i].x === step.x && this.open[i].y === step.y && this.open[i].z === step.z)
+                    return this.open[i];
+            }
+
+            return false;
+        },
+
         // Get the lowest costing tile in the open set
         getBestOpen: function () {
             var bestI = 0;
@@ -65,7 +74,20 @@ $(document).ready(function () {
             return false;
         },
 
-        findPath: function (xC, yC, xT, yT, maxSearch) {
+        inClosed3d: function (step) {
+            for (var i = 0; i < this.closed.length; i++) {
+                if (this.closed[i].x === step.x &&
+                    this.closed[i].y === step.y &&
+                    this.closed[i].z === step.z)
+                    return this.closed[i];
+            }
+
+            return false;
+        },
+
+        // @TODO 3d version
+        // @TODO Integrate maximum step limiter
+        findPath: function (xC, yC, xT, yT, maxSteps) {
             var current, // Current best open tile
                 neighbors, // Dump of all nearby neighbor tiles
                 neighborRecord, // Any pre-existing records of a neighbor

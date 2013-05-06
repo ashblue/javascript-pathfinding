@@ -1,5 +1,6 @@
 var jp = jp || {};
 
+// @TODO Add input for step limiter
 $(document).ready(function () {
     var $MAP = $('.map'),
         MAP_LV_COUNT = 4,
@@ -156,7 +157,6 @@ $(document).ready(function () {
             return tmpMap;
         },
 
-        // @TODO Incomplete
         getMap3d: function () {
             var tmpMap = [],
                 status,
